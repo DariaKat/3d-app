@@ -1,0 +1,48 @@
+{
+  "name": "myself_app",
+  "version": "1.0.0",
+  "description": "my project",
+  "main": "index.js",
+  "repository": "https://github.com/DariaKat/3d-app.git",
+  "author": "Daria",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack serve --env port=3000 mode=development",
+    "build:dev": "webpack --env mode=development",
+    "build:prod": "webpack --env mode=production"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.26",
+    "@types/webpack": "^5.28.0",
+    "@types/webpack-dev-server": "^4.7.2",
+    "css-loader": "^6.7.3",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.5",
+    "node-sass": "^8.0.0",
+    "sass": "^1.59.3",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.2",
+    "ts-loader": "^9.4.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5",
+    "webpack": "^5.76.1",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.13.0"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.0.1",
+    "@react-three/drei": "^9.66.4",
+    "@react-three/fiber": "^8.13.0",
+    "antd": "^5.4.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.9",
+    "react-icons": "^4.8.0",
+    "react-router-dom": "^6.9.0",
+    "styled-components": "^5.3.9",
+    "three": "^0.152.2"
+  }
+}
