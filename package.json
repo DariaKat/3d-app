@@ -4,12 +4,15 @@
   "description": "my project",
   "main": "index.js",
   "repository": "https://github.com/DariaKat/3d-app.git",
+  "homepage": "https://DariaKat.github.io/3d-app",
   "author": "Daria",
   "license": "MIT",
   "scripts": {
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build",
     "dev": "webpack serve --env port=3000 mode=development",
     "build:dev": "webpack --env mode=development",
-    "build:prod": "webpack --env mode=production"
+    "build": "webpack --env mode=production"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
@@ -19,6 +22,7 @@
     "@types/webpack": "^5.28.0",
     "@types/webpack-dev-server": "^4.7.2",
     "css-loader": "^6.7.3",
+    "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.7.5",
     "node-sass": "^8.0.0",
