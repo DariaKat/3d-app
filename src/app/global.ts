@@ -10,12 +10,28 @@ export default createGlobalStyle`
 `;
 
 export const Header = styled.header`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   background: #001529;
   padding: 20px;
-
-  a {
+  color: #fff;
+  a,
+  span {
     color: #fff;
     text-decoration: none;
     margin: 0 10px;
+    cursor: pointer;
   }
+`;
+
+export const Container = styled.div`
+  display: flex;
+`;
+
+export const Spinner = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
 `;

@@ -1,0 +1,1 @@
+export { RegistrBlock } from "./ui";

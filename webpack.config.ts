@@ -2,6 +2,7 @@ import path from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import webpack from "webpack";
+import Dotenv from "dotenv-webpack";
 
 interface IProps {
   mode: string;
@@ -48,6 +49,9 @@ export default (env: IProps) => {
         template: path.resolve(__dirname, "public", "index.html"),
       }),
       new webpack.ProgressPlugin(),
+      new Dotenv({
+        path: `./.env.development`,
+      }),
       new MiniCssExtractPlugin({
         filename: "css/[name].[contenthash:8].css",
         chunkFilename: "css/[name].[contenthash:8].css",
