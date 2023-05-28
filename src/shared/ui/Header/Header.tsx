@@ -18,15 +18,17 @@ export const Header: FC = () => {
       <HeaderStyle>
         <Container>
           <Link to={"/"}>Главная</Link>
+
+          {user && <Link to={"/calculate"}>Расчет</Link>}
         </Container>
         <Container>
           {user ? (
             <>
               <Avatar
-                style={{ backgroundColor: "#87d068" }}
+                style={{ backgroundColor: "#1677ff" }}
                 icon={<RocketOutlined />}
               />
-              {user.name}
+              <Text>{user.name}</Text>
               <Text
                 onClick={() => {
                   signOut(ga);

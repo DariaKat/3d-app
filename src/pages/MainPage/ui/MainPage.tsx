@@ -1,7 +1,5 @@
-import { MainBlock } from "widgets/MainBlock";
-
 const MainPage = () => {
-  return <MainBlock />;
+  return <>Добро пожаловать</>;
 };
 
 export default MainPage;

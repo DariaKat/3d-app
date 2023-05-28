@@ -7,6 +7,7 @@ import { RegistrPage } from "pages/RegistrPage";
 import { Spinner } from "./global";
 import { Header } from "shared/ui/Header";
 import { RequireAuth } from "shared/ui/RequireAuth";
+import { CalculatePage } from "pages/CalculatePage";
 
 export const App = () => {
   return (
@@ -20,11 +21,12 @@ export const App = () => {
         }
       >
         <Routes>
+          <Route path="/" element={<MainPage />} />
           <Route
-            path="/"
+            path="/calculate"
             element={
               <RequireAuth>
-                <MainPage />
+                <CalculatePage />
               </RequireAuth>
             }
           />

@@ -47,6 +47,7 @@ export default (env: IProps) => {
     plugins: [
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, "public", "index.html"),
+        favicon: path.resolve(__dirname, "public", "fire_icon.ico"),
       }),
       new webpack.ProgressPlugin(),
       new Dotenv({

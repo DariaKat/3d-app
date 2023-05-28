@@ -8,8 +8,6 @@
   "author": "Daria",
   "license": "MIT",
   "scripts": {
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build",
     "dev": "webpack serve --env port=3000 mode=development",
     "build:dev": "webpack --env mode=development",
     "build": "webpack --env mode=production"
