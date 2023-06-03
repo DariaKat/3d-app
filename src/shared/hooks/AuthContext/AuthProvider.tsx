@@ -1,8 +1,8 @@
 import { useMemo, useState, FC, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { AuthContext } from "./AuthContext";
+import { useNavigate } from "react-router-dom";
 import { IUser } from "./type";
-import { db } from "app/firebase";
 
 interface IProps {
   children: any;
@@ -12,15 +12,20 @@ export const AuthProvider: FC<IProps> = ({ children }) => {
   const [user, setUser] = useState<IUser | null>(null);
   const ga = getAuth();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const unlisten = onAuthStateChanged(ga, (user) => {
-      user
-        ? setUser({
-            _id: user.uid,
-            email: user.email,
-            name: user.displayName,
-          })
-        : setUser(null);
+      if (user) {
+        setUser({
+          _id: user.uid,
+          email: user.email,
+          name: user.displayName,
+        });
+      } else {
+        setUser(null);
+        navigate("/login");
+      }
     });
 
     return () => unlisten();
@@ -31,7 +36,6 @@ export const AuthProvider: FC<IProps> = ({ children }) => {
       user,
       setUser,
       ga,
-      db,
     }),
     [user, ga]
   );

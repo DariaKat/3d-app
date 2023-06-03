@@ -6,8 +6,8 @@ import { LoginPage } from "pages/LogInPage";
 import { RegistrPage } from "pages/RegistrPage";
 import { Spinner } from "./global";
 import { Header } from "shared/ui/Header";
-import { RequireAuth } from "shared/ui/RequireAuth";
 import { CalculatePage } from "pages/CalculatePage";
+import { MaterialPage } from "pages/MaterialPage";
 
 export const App = () => {
   return (
@@ -22,14 +22,8 @@ export const App = () => {
       >
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route
-            path="/calculate"
-            element={
-              <RequireAuth>
-                <CalculatePage />
-              </RequireAuth>
-            }
-          />
+          <Route path="/calculate" element={<CalculatePage />} />
+          <Route path="/materials" element={<MaterialPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registr" element={<RegistrPage />} />
         </Routes>

@@ -1,0 +1,1 @@
+export { TabelMaterial } from "./ui";

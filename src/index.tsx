@@ -12,12 +12,12 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <AuthProvider>
-    <BrowserRouter>
+  <BrowserRouter>
+    <AuthProvider>
       <Provider store={store}>
         <GlobalStyles />
         <App />
       </Provider>
-    </BrowserRouter>
-  </AuthProvider>
+    </AuthProvider>
+  </BrowserRouter>
 );

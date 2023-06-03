@@ -6,7 +6,6 @@ export interface AuthContextProps {
   user?: IUser;
   setUser?: (theme: IUser | null) => void;
   ga?: Auth;
-  db?: any;
 }
 
 export const AuthContext = createContext<AuthContextProps>({});

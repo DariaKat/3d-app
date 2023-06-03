@@ -1,14 +1,5 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 50px 0;
-`;
-
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -31,24 +22,22 @@ export const Form = styled.form`
     }
   }
 
-  div:first-child {
-    width: 100%;
-  }
-
-  div {
-    margin-bottom: 20px;
-  }
-
-  input {
-    margin-bottom: 20px;
-  }
-
   button {
     max-width: 250px;
     width: 100%;
+    margin-top: 10px;
   }
 
   @media only screen and (min-width: 768px) {
     margin: 20px auto;
   }
+`;
+
+export const Block = styled.div`
+  margin: 10px 0;
+  width: 100%;
+`;
+
+export const TextForm = styled.div`
+  margin: 15px 0 0;
 `;

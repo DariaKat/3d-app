@@ -1,11 +1,11 @@
 import { IFormInput, IParam } from "../model/type";
-import { defaultData } from "./data";
+import { IMaterial } from "shared/store/slices/materialSlice";
 
 const mathModel = (
   tempArray: number[],
   boundaryConditionsArray: number[],
   data: IFormInput,
-  infoMaterial: IParam,
+  infoMaterial: IMaterial,
   countLayers: number,
   layer: number,
   timeIntervalArray: number[]
@@ -27,16 +27,17 @@ const mathModel = (
   while (tnm[tnm.length - 1] < data.endTemp) {
     const ambientTemperature =
       (tempArray[index] + tlayer[0][tlayer[0].length - 1]) / 2;
-   
-    const thermalConductivity =
-      infoMaterial.thermal_conductivity(ambientTemperature);
+
+    const thermalConductivity = eval(
+      infoMaterial.thermal_conductivity + "* ambientTemperature"
+    );
 
     const temp =
       tlayer[0][tlayer[0].length - 1] +
       (tempArray[index] - tlayer[0][tlayer[0].length - 1]) *
         (layer /
           (thermalConductivity / boundaryConditionsArray[index] + layer / 2));
-    
+
     tmn.push(temp);
 
     const tempop = (temp + tlayer[1][tlayer[1].length - 2]) / 2;
@@ -63,15 +64,17 @@ const mathModel = (
 
     const tempnew = (paramPreEndLength + tnm[tnm.length - 1]) / 2;
 
-    const thermalConductivityNew = infoMaterial.thermal_conductivity(tempnew);
-    const heatCapacity = infoMaterial.heat_capacity(tempnew);
+    const thermalConductivityNew = eval(
+      infoMaterial.thermal_conductivity + "*tempnew"
+    );
+    const heatCapacity = eval(infoMaterial.heat_capacity + "* tempnew");
 
     const coef = tnm[tnm.length - 1];
 
     const coefTempnp =
       1.5 * Math.cbrt(coef - +data.startTemp) +
       5.67 *
-        infoMaterial.blackness(coef) *
+        eval(infoMaterial.blackness + "* coef") *
         ((Math.pow((coef + 273) / 100, 4) -
           Math.pow((+data.startTemp + 273) / 100, 4)) /
           (coef - +data.startTemp));
@@ -84,7 +87,7 @@ const mathModel = (
         timeIntervalArray[index] *
         (thermalConductivityNew * (paramPreEndLength - coef) -
           coefCheck * layer * (coef - +data.startTemp))) /
-        (infoMaterial.bulk_mass_dry_condition * layer * layer * heatCapacity);
+        (+infoMaterial.bulk_mass_dry_condition * layer * layer * heatCapacity);
 
     arrayYak.push(temYakovlev);
 
@@ -121,21 +124,22 @@ const mathModel = (
   return dataInfo;
 };
 
-const initialProperties = (infoMaterial: IParam, data: IFormInput) => {
+const initialProperties = (infoMaterial: IMaterial, data: IFormInput) => {
   // расчет начальных значений
-
+  // const stritTemp = +data.startTemp;
   //расчет теплофизических характеристик
   //теплопроводность
-  const thermalConductivity = infoMaterial.thermal_conductivity(
-    +data.startTemp
+  const thermalConductivity = eval(
+    infoMaterial.thermal_conductivity + "* data.startTemp"
   );
+
   //теплоемкость
-  const heatCapacity = infoMaterial.heat_capacity(+data.startTemp);
+  const heatCapacity = eval(infoMaterial.heat_capacity + "* data.startTemp");
   //температуропроводность
   const temperatureConductivity =
     (thermalConductivity /
       ((heatCapacity + 0.05 * +data.humidity) *
-        infoMaterial.bulk_mass_dry_condition)) *
+        +infoMaterial.bulk_mass_dry_condition)) *
     3.6;
 
   //граничные условия теплообмена на обогреваемой поверхности
@@ -185,10 +189,11 @@ const initialProperties = (infoMaterial: IParam, data: IFormInput) => {
   //звполним массив граничными условиями теплообмена
   const boundaryConditionsArray = [...Array(countLayers + 1)].map(
     (_, index) => {
-
       return (
         29 +
-        infoMaterial.reduced_radiation_coefficient(tempArray[index]) *
+        eval(
+          infoMaterial.reduced_radiation_coefficient + "* tempArray[index]"
+        ) *
           ((Math.pow((tempArray[index] + 273) / 100, 4) -
             Math.pow((tempHeatedSurfaceCheck[index] + 273) / 100, 4)) /
             (tempArray[index] - tempHeatedSurfaceCheck[index]))
@@ -207,12 +212,10 @@ const initialProperties = (infoMaterial: IParam, data: IFormInput) => {
   );
 };
 
-export const startCalculate = (data: IFormInput) => {
-  const infoMaterial: IParam = defaultData[data.materialType];
+export const startCalculate = (data: IFormInput, defaultData: IMaterial) => {
+  if (defaultData) {
+    const result = initialProperties(defaultData, data);
 
-  if (infoMaterial) {
-    const result = initialProperties(infoMaterial, data);
-    
     return result;
   } else {
     return "error";

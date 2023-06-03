@@ -8,7 +8,7 @@ interface IProps {
 export default function FireModal({ position }: IProps) {
   const group = useRef();
 
-  const { scene, animations }: any = useGLTF("/scene.gltf", true);
+  const { scene, animations }: any = useGLTF("/models/fire/scene.gltf", true);
   const { actions, mixer, names } = useAnimations(animations, group);
 
   useEffect(() => {

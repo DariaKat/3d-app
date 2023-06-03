@@ -20,6 +20,7 @@ export const Header: FC = () => {
           <Link to={"/"}>Главная</Link>
 
           {user && <Link to={"/calculate"}>Расчет</Link>}
+          {user && <Link to={"/materials"}>Материалы</Link>}
         </Container>
         <Container>
           {user ? (

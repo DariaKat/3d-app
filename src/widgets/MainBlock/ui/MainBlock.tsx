@@ -10,7 +10,7 @@ export const MainBlock: FC = () => {
   return (
     <Block>
       <FormMchs setIsOpen={setIsOpen} setGetResult={setGetResult} />
-      {true && <Model getResult={getResult} />}
+      {isOpen && <Model getResult={getResult} />}
     </Block>
   );
 };
