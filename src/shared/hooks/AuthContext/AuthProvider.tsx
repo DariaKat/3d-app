@@ -17,10 +17,12 @@ export const AuthProvider: FC<IProps> = ({ children }) => {
   useEffect(() => {
     const unlisten = onAuthStateChanged(ga, (user) => {
       if (user) {
+        console.log(user);
         setUser({
           _id: user.uid,
           email: user.email,
           name: user.displayName,
+          avatar: user.photoURL,
         });
       } else {
         setUser(null);

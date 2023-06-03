@@ -25,11 +25,16 @@ export const Header: FC = () => {
         <Container>
           {user ? (
             <>
-              <Avatar
-                style={{ backgroundColor: "#1677ff" }}
-                icon={<RocketOutlined />}
-              />
-              <Text>{user.name}</Text>
+              <Link to={"/account"}>
+                <Container>
+                  <Avatar
+                    style={{ backgroundColor: "#1677ff" }}
+                    src={user.avatar}
+                    icon={<RocketOutlined />}
+                  />
+                  <Text>{user.name}</Text>
+                </Container>
+              </Link>
               <Text
                 onClick={() => {
                   signOut(ga);
