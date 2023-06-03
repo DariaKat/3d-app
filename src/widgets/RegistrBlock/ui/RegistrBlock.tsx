@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { message } from "antd";
 import { Block } from "./RegistrBlock.styled";
 import { FormLogin } from "features/FormLogin";
 import { SubmitHandler } from "react-hook-form";
@@ -10,9 +11,9 @@ import { useAuth } from "shared/hooks/AuthContext/useAuth";
 export const RegistrBlock: FC = () => {
   const navigate = useNavigate();
   const { ga } = useAuth();
+  const [messageApi, contextHolder] = message.useMessage();
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    console.log(data);
     try {
       const user = await createUserWithEmailAndPassword(
         ga,
@@ -26,12 +27,16 @@ export const RegistrBlock: FC = () => {
 
       user && navigate("/");
     } catch (error) {
-      alert(error);
+      messageApi.open({
+        type: "error",
+        content: "Что-то пошло не так при регистрации",
+      });
     }
   };
 
   return (
     <Block>
+      {contextHolder}
       <FormLogin onSubmit={onSubmit} title="Регистрация" type="registr" />
     </Block>
   );

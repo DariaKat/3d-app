@@ -2,6 +2,7 @@ import { useMemo, useState, FC, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { AuthContext } from "./AuthContext";
 import { IUser } from "./type";
+import { db } from "app/firebase";
 
 interface IProps {
   children: any;
@@ -30,6 +31,7 @@ export const AuthProvider: FC<IProps> = ({ children }) => {
       user,
       setUser,
       ga,
+      db,
     }),
     [user, ga]
   );
