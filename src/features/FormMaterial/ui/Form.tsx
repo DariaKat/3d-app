@@ -36,7 +36,6 @@ export const FormMaterial: FC<IFormProps> = ({ title, messageApi }) => {
       });
       reset({});
     } catch (error: unknown) {
-      console.log(error);
       messageApi.open({
         type: "error",
         content: "Что-то пошло не так, попробуйте позднее!",

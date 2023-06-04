@@ -1,10 +1,12 @@
 import { Canvas } from "@react-three/fiber";
-import { Stats, OrbitControls } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { Physics, Debug, usePlane } from "@react-three/cannon";
-import { FC } from "react";
-import { Container } from "./Model.styled";
+import { FC, useState } from "react";
+import { Slider } from "antd";
+import { Container, Time } from "./Model.styled";
 import { IResult } from "features/Form";
 import FireModal from "./FireModal";
+import { converTemtToNumber } from "shared/lib/convertTempToColor";
 
 interface IProps {
   getResult: IResult;
@@ -17,6 +19,7 @@ interface IPropsPlane {
 interface ILayer {
   temp: number[];
   index: number;
+  value: number;
 }
 
 function Plane(props: IPropsPlane) {
@@ -30,20 +33,31 @@ function Plane(props: IPropsPlane) {
 }
 
 function Layer(props: ILayer) {
-  console.log(props.temp);
-
   return (
     <mesh position={[0, 1.5, props.index * 0.2]} receiveShadow castShadow>
       <boxGeometry args={[5, 3, 0.2]} />
-      <meshStandardMaterial color={`#CD5151`} />
+      <meshStandardMaterial
+        color={converTemtToNumber(props.value, props.temp)}
+      />
     </mesh>
   );
 }
 
 export const Model: FC<IProps> = ({ getResult }) => {
-  console.log(getResult);
+  const [value, setValue] = useState(getResult.tmn[0]);
+
   return (
     <Container id="canvas-container">
+      <Time>
+        Время:{" "}
+        <Slider
+          style={{ width: "100%", marginLeft: "15px" }}
+          min={0}
+          max={getResult.time[getResult.time.length - 1]}
+          step={getResult.interval}
+          onChange={(value: number) => setValue(getResult.time.indexOf(value))}
+        />
+      </Time>
       <Canvas flat linear camera={{ position: [-15, 10, 15], fov: 25 }}>
         <ambientLight intensity={0.6} />
         <spotLight position={[20, 20, 20]} angle={0.15} penumbra={1} />
@@ -54,18 +68,17 @@ export const Model: FC<IProps> = ({ getResult }) => {
             {getResult && (
               <>
                 <FireModal
-                  position={[0, 1.3, getResult.tlayer?.length * 0.25]}
+                  position={[0, 1.3, -getResult.tlayer?.length * 0.25]}
                 />
 
                 {getResult.tlayer.map((item, index) => (
-                  <Layer key={index} temp={item} index={index} />
+                  <Layer key={index} temp={item} index={index} value={value} />
                 ))}
               </>
             )}
           </Debug>
         </Physics>
         <OrbitControls />
-        {/* <Stats /> */}
       </Canvas>
     </Container>
   );

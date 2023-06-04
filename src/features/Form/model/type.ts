@@ -22,6 +22,8 @@ export interface IResult {
   tnm: number[];
   tnp: number[];
   top: number[];
+  time: number[];
+  interval: number;
 }
 
 export interface IProps {

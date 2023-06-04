@@ -9,11 +9,18 @@ export const Container = styled.div`
   width: 100%;
   margin: 0 auto 20px;
   div {
-    height: 472px !important;
     canvas {
       width: 100%;
       height: 100%;
       margin: 0;
     }
   }
+`;
+
+export const Time = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 15px 20px 0;
+  width: 100%;
 `;

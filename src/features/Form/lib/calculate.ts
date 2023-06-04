@@ -8,7 +8,8 @@ const mathModel = (
   infoMaterial: IMaterial,
   countLayers: number,
   layer: number,
-  timeIntervalArray: number[]
+  timeIntervalArray: number[],
+  timeInterval: number
 ) => {
   //инициализируем массивы и заполняем первичными данными
   const tmn = [+data.startTemp];
@@ -112,6 +113,12 @@ const mathModel = (
     index++;
   }
 
+  const timeIntervals = [...Array(tlayer[tlayer.length - 1].length)].map(
+    (_, index) => {
+      return timeInterval * (index + 1);
+    }
+  );
+
   const dataInfo: any = {
     tmn: tmn,
     top: top,
@@ -119,6 +126,8 @@ const mathModel = (
     tnp: tnp,
     tnm: tnm,
     arrayYak: arrayYak,
+    time: timeIntervals,
+    interval: timeInterval,
   };
 
   return dataInfo;
@@ -208,7 +217,8 @@ const initialProperties = (infoMaterial: IMaterial, data: IFormInput) => {
     infoMaterial,
     countLayers,
     layer,
-    timeIntervalArray
+    timeIntervalArray,
+    timeInterval
   );
 };
 
