@@ -21,6 +21,26 @@ export const Time = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 15px 20px 0;
+  padding: 15px 20px;
   width: 100%;
+`;
+
+export const Table = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+`;
+
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Cell = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #b3b3b3;
+  padding: 0 5px;
 `;

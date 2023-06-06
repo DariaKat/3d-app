@@ -2,11 +2,14 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { Physics, Debug, usePlane } from "@react-three/cannon";
 import { FC, useState } from "react";
-import { Slider } from "antd";
-import { Container, Time } from "./Model.styled";
+import { Slider, Typography } from "antd";
+import { Cell, Column, Container, Table, Time } from "./Model.styled";
 import { IResult } from "features/Form";
 import FireModal from "./FireModal";
 import { converTemtToNumber } from "shared/lib/convertTempToColor";
+import { LineGraph } from "./Line";
+
+const { Title } = Typography;
 
 interface IProps {
   getResult: IResult;
@@ -48,6 +51,76 @@ export const Model: FC<IProps> = ({ getResult }) => {
 
   return (
     <Container id="canvas-container">
+      <Time>
+        <Title level={4}>Результаты:</Title>
+      </Time>
+      <Time>
+        <Title level={5}>График:</Title>
+      </Time>
+      <Time>
+        <LineGraph getData={getResult} />
+      </Time>
+      <Time>
+        <Title level={5}>Таблица с результатами:</Title>
+      </Time>
+      <Time>
+        <Table>
+          <Column>
+            <Cell>Время (ч.)</Cell>
+            {getResult.time.map((item, index) => (
+              <Cell key={index}>{item}</Cell>
+            ))}
+          </Column>
+          <Column>
+            <Cell>
+              t<sub>MN</sub>
+            </Cell>
+            {getResult.tmn.map((item, index) => (
+              <Cell key={index}>{item.toFixed(2)}</Cell>
+            ))}
+          </Column>
+          <Column>
+            <Cell>
+              t<sub>о.п.</sub>
+            </Cell>
+            {getResult.top.map((item) => (
+              <Cell key={item}>{item.toFixed(2)}</Cell>
+            ))}
+          </Column>
+
+          {getResult.tlayer.map((item, index) => (
+            <Column key={index}>
+              <Cell>
+                t<sub>{index}</sub>
+              </Cell>
+              {item.map((item) => (
+                <Cell key={item}>{item.toFixed(2)}</Cell>
+              ))}
+            </Column>
+          ))}
+
+          <Column>
+            <Cell>
+              t<sub>н.п.</sub>
+            </Cell>
+            {getResult.tnp.map((item, index) => (
+              <Cell key={index}>{item.toFixed(2)}</Cell>
+            ))}
+          </Column>
+
+          <Column>
+            <Cell>
+              t<sub>NM</sub>
+            </Cell>
+            {getResult.tnm.map((item, index) => (
+              <Cell key={index}>{item.toFixed(2)}</Cell>
+            ))}
+          </Column>
+        </Table>
+      </Time>
+      <Time>
+        <Title level={5}>Модель:</Title>
+      </Time>
       <Time>
         Время:{" "}
         <Slider

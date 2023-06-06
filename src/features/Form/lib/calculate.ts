@@ -115,7 +115,7 @@ const mathModel = (
 
   const timeIntervals = [...Array(tlayer[tlayer.length - 1].length)].map(
     (_, index) => {
-      return timeInterval * (index + 1);
+      return +(timeInterval * index).toFixed(1);
     }
   );
 
@@ -127,7 +127,7 @@ const mathModel = (
     tnm: tnm,
     arrayYak: arrayYak,
     time: timeIntervals,
-    interval: timeInterval,
+    interval: +timeInterval.toFixed(1),
   };
 
   return dataInfo;
@@ -135,7 +135,7 @@ const mathModel = (
 
 const initialProperties = (infoMaterial: IMaterial, data: IFormInput) => {
   // расчет начальных значений
-  // const stritTemp = +data.startTemp;
+
   //расчет теплофизических характеристик
   //теплопроводность
   const thermalConductivity = eval(
