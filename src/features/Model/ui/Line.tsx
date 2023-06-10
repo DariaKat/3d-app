@@ -112,10 +112,9 @@ export const LineGraph: FC<IProps> = ({ getData }) => {
         activeDot={{ r: 8 }}
       />
       <Line type="monotone" dataKey="tnp" stroke="#82ca9d" />
-      <Line type="monotone" dataKey="layer1" stroke="#bdca82" />
-      <Line type="monotone" dataKey="layer2" stroke="#ca8282" />
-      <Line type="monotone" dataKey="layer3" stroke="#82b9ca" />
-      <Line type="monotone" dataKey="layer4" stroke="#c882ca" />
+      {getData.tlayer.map((_, index) => (
+        <Line type="monotone" dataKey={`layer${index}`} stroke={`#c882ca`} />
+      ))}
     </LineChart>
   );
 };

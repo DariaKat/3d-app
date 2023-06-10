@@ -113,11 +113,16 @@ const mathModel = (
     index++;
   }
 
-  const timeIntervals = [...Array(tlayer[tlayer.length - 1].length)].map(
+  const timeIntervals = [...Array(tlayer[tlayer.length - 2].length)].map(
     (_, index) => {
       return +(timeInterval * index).toFixed(1);
     }
   );
+  tmn.pop();
+  top.pop();
+  tnp.pop();
+  tnm.pop();
+  tlayer.forEach((item) => item.pop());
 
   const dataInfo: any = {
     tmn: tmn,
@@ -167,7 +172,7 @@ const initialProperties = (infoMaterial: IMaterial, data: IFormInput) => {
   const timeInterval = (layer * layer) / (2 * temperatureConductivity);
 
   //заполняем массив с интервалами времени прогрева железобетонной стены
-  const timeIntervalArray = [...Array(countLayers + 1)].map((_, index) => {
+  const timeIntervalArray = [...Array(countLayers + 2)].map((_, index) => {
     return timeInterval * (index + 1);
   });
 

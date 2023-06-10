@@ -8,7 +8,6 @@ import { Spinner } from "./global";
 import { Header } from "shared/ui/Header";
 import { CalculatePage } from "pages/CalculatePage";
 import { MaterialPage } from "pages/MaterialPage";
-import { SimulationPage } from "pages/SimulationPage";
 import { AccountPage } from "pages/AccountPage";
 
 export const App = () => {
@@ -26,7 +25,6 @@ export const App = () => {
           <Route path="/" element={<MainPage />} />
           <Route path="/calculate" element={<CalculatePage />} />
           <Route path="/account" element={<AccountPage />} />
-          <Route path="/simulation" element={<SimulationPage />} />
           <Route path="/materials" element={<MaterialPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registr" element={<RegistrPage />} />
