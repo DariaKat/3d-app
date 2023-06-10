@@ -131,7 +131,7 @@ export const Model: FC<IProps> = ({ getResult }) => {
           onChange={(value: number) => setValue(getResult.time.indexOf(value))}
         />
       </Time>
-      <Canvas flat linear camera={{ position: [-15, 10, 15], fov: 25 }}>
+      <Canvas flat linear camera={{ position: [-15, 10, -15], fov: 25 }}>
         <ambientLight intensity={0.6} />
         <spotLight position={[20, 20, 20]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />

@@ -118,6 +118,7 @@ const mathModel = (
       return +(timeInterval * index).toFixed(1);
     }
   );
+
   tmn.pop();
   top.pop();
   tnp.pop();
